@@ -4,7 +4,7 @@ import {
   createPost,
   listAllPosts,
   listPostsByAuthor,
-  listPostsByTag,
+  listPostsByTags,
   getPostById,
   updatePost,
   deletePost,
@@ -104,7 +104,7 @@ describe('listing posts', () => {
     expect(posts.length).toBe(3)
   })
   test('should be able to filter posts by tag', async () => {
-    const posts = await listPostsByTag('nodejs')
+    const posts = await listPostsByTags('nodejs')
     expect(posts.length).toBe(1)
   })
 })

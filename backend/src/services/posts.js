@@ -28,7 +28,8 @@ export async function listPostsByAuthor(author, options) {
 
 // List posts by tags
 export async function listPostsByTags(tags, options) {
-  return await listPosts({ tags: { $in: tags.split(',') } }, options)
+  const tagsArray = Array.isArray(tags) ? tags : tags.split(',')
+  return await listPosts({ tags: { $in: tagsArray } }, options)
 }
 
 // THE GET SINGLE POST
