@@ -178,7 +178,7 @@ The application will continue evolving with:
 Clone the repository
 
 ```bash
-git clone https://github.com/XMAN-MHD/Modern-Full-Stack-React-Projects-Ch5.git
+git clone https://github.com/XMAN-MHD/from-zero-to-fullstack-ch5-devops.git
 ```
 
 Install dependencies
