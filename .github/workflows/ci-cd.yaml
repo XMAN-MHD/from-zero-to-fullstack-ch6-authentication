@@ -61,8 +61,8 @@ jobs:
       - name: Run Jest tests
         run: npm test
 
-  deploy-frontend:
-    name: Deploy Frontend
+  deploy:
+    name: Deploy to Render
     runs-on: ubuntu-latest
     needs:
       - frontend
@@ -71,5 +71,8 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
+      - name: Trigger Render backend deploy
+        run: curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
+
       - name: Trigger Render frontend deploy
         run: curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
