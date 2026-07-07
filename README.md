@@ -1,14 +1,16 @@
-# 🚀 From Zero to Full Stack — Chapter 5: DevOps
+# 🔐 From Zero to Full Stack — Chapter 6: Authentication with JWT
 
-> Learn how professional software teams build, test, and deploy production-ready Full-Stack applications.
+> Learn how to secure a Full-Stack application using JWT, bcrypt, and React Router.
 
-Welcome to **Chapter 5** of the **From Zero to Full Stack** series.
+Welcome to **Chapter 6** of the **From Zero to Full Stack** series.
 
-In the previous chapters, we built a complete Full-Stack application with a backend and a frontend great. 
+In the previous chapter, we deployed our Full-Stack Blog application using **Docker**, **GitHub Actions**, and **Render**, creating a professional CI/CD pipeline.
 
-Now it's time to transform that application into a professional software project by introducing modern DevOps practices.
+Now it's time to secure our application.
 
-In this chapter, you'll learn how to automate development workflows, containerize applications, implement Continuous Integration (CI), Continuous Deployment (CD), and deploy your application to production.
+In this chapter, we'll implement a complete authentication system using **JSON Web Tokens (JWT)**. Users will be able to create accounts, securely log in, access protected resources, and interact with the application as authenticated users.
+
+By the end of this chapter, our blog will evolve from a public application into a secure, production-ready Full-Stack application.
 
 ---
 
@@ -16,100 +18,96 @@ In this chapter, you'll learn how to automate development workflows, containeriz
 
 By the end of this chapter, you will be able to:
 
-- Containerize a Full-Stack application using Docker.
-- Build multi-container applications with Docker Compose.
-- Manage environment variables.
-- Configure ESLint and Prettier.
-- Automate code quality checks.
-- Write and execute automated tests.
-- Build a professional Continuous Integration pipeline.
-- Build a Continuous Deployment pipeline.
-- Deploy applications to production using Render.
-- Understand modern DevOps workflows used by software engineering teams.
+- Understand Authentication vs Authorization.
+- Understand how JWT works.
+- Hash passwords using bcrypt.
+- Create secure user accounts.
+- Authenticate users.
+- Generate JSON Web Tokens.
+- Protect backend routes.
+- Protect frontend pages.
+- Implement login and signup.
+- Manage authentication state in React.
+- Send authenticated API requests.
+- Build a secure authentication workflow.
 
 ---
 
 # 🧠 What You'll Learn
 
-## Docker
+## Authentication Fundamentals
 
-- Docker Fundamentals
-- Images
-- Containers
-- Volumes
-- Networks
-- Dockerfiles
-- Multi-stage Builds
+- Authentication
+- Authorization
+- Stateless Authentication
+- Session vs JWT
+- Claims
+- Access Tokens
 
 ---
 
-## Docker Compose
+## JWT
 
-- Multi-container Applications
-- Backend + Frontend
+- JWT Structure
+- Header
+- Payload
+- Signature
+- Token Creation
+- Token Verification
+- Token Expiration
+- Secure Token Storage
+
+---
+
+## Backend Authentication
+
+- User Model
+- Signup
+- Login
+- Password Hashing
+- bcrypt
+- jsonwebtoken
+- Authentication Middleware
+- Protected Routes
+
+---
+
+## Frontend Authentication
+
+- React Router
+- Login Page
+- Signup Page
+- Protected Routes
+- Authentication Context
+- Logout
+- Authenticated Requests
+
+---
+
+## Security Best Practices
+
+- Password Hashing
 - Environment Variables
-- Networking
-
----
-
-## Code Quality
-
-- ESLint
-- Prettier
-- Husky
-- Commitlint
-- Git Hooks
-
----
-
-## Testing
-
-- Jest
-- MongoDB Memory Server
-- Unit Testing
-- Integration Testing
-
----
-
-## GitHub Actions
-
-- Workflow Files
-- Jobs
-- Steps
-- Runners
-- GitHub Secrets
-
----
-
-## Continuous Integration (CI)
-
-- Automated Builds
-- Automated Linting
-- Automated Testing
-
----
-
-## Continuous Deployment (CD)
-
-- Deploy Hooks
-- GitHub Actions
-- Render
-- Automated Production Deployment
+- Secret Keys
+- Authorization Headers
+- Token Expiration
+- Secure Authentication Flow
 
 ---
 
 # 🏗️ Project
 
-In this chapter, we'll transform the blog application built in the previous chapters into a production-ready application.
+In this chapter, we'll transform our Blog application into a secure platform.
 
-We'll implement a professional development workflow similar to the one used by modern software engineering teams.
+Features include:
 
-By the end of this chapter, every push to the main branch will automatically:
-
-- Verify code quality.
-- Execute automated tests.
-- Build the application.
-- Deploy the application to production.
+- User Registration
+- User Login
+- JWT Authentication
+- Protected API Endpoints
+- Protected Frontend Pages
+- Logout
+- Authenticated CRUD Operations
 
 ---
 
@@ -121,45 +119,53 @@ Before starting this chapter, you should have completed:
 - ✅ Chapter 2 — Backend Fundamentals
 - ✅ Chapter 3 — Backend Development
 - ✅ Chapter 4 — Frontend Development
+- ✅ Chapter 5 — DevOps
 
 ---
 
 # 🛠️ Technologies
 
-- Docker
-- Docker Compose
-- GitHub Actions
-- GitHub
-- Git
+## Backend
+
 - Node.js
-- Express.js
-- React
+- Express
 - MongoDB
-- Jest
-- ESLint
-- Prettier
-- Husky
-- Commitlint
-- Render
+- Mongoose
+- bcrypt
+- jsonwebtoken
+
+## Frontend
+
+- React
+- React Router
+- TanStack Query
 
 ---
 
 # 📂 Project Structure
 
 ```text
-from-zero-to-fullstack-ch5-devops/
+from-zero-to-fullstack-ch6-authentication/
 
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yaml
-│
 ├── backend/
-├── src/
+│   ├── src/
+│   │   ├── db/
+│   │   ├── services/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   └── ...
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   └── ...
+│
 ├── compose.yaml
-├── dockerfile
-├── .prettierrc.json
-├── eslint.config.js
-└── ...
+└── README.md
 ```
 
 ---
@@ -169,76 +175,55 @@ from-zero-to-fullstack-ch5-devops/
 Clone the repository
 
 ```bash
-git clone https://github.com/XMAN-MHD/from-zero-to-fullstack-ch5-devops.git
+git clone https://github.com/XMAN-MHD/from-zero-to-fullstack-ch6-authentication.git
 ```
 
-Install dependencies
+Enter the project
 
 ```bash
-npm install
-
-cd backend
-npm install
+cd from-zero-to-fullstack-ch6-authentication
 ```
 
-Run the application
+Start the application
 
 ```bash
-docker compose up --build
+docker compose up
 ```
 
-Frontend
-
-```
-http://localhost:3000
-```
-
-Backend
-
-```
-http://localhost:3001
-```
-
----
-
-# 🧪 Testing
-
-Frontend
-
-```bash
-npm run lint
-npm run build
-```
+Or run each application separately.
 
 Backend
 
 ```bash
 cd backend
+npm install
+npm run dev
+```
 
-npm run lint
-npm test
+Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
 ---
 
-# 🔄 CI/CD Pipeline
+# 📝 Exercises
 
-Every push to the **main** branch automatically executes the following pipeline:
+By the end of this chapter, you should be able to:
 
-```text
-Push
- │
- ▼
-Frontend CI
- │
- ▼
-Backend CI
- │
- ▼
-Deploy to Render
-```
-
-If any step fails, the deployment is automatically cancelled.
+- Create a User model.
+- Hash passwords.
+- Register users.
+- Authenticate users.
+- Generate JWTs.
+- Verify JWTs.
+- Protect backend routes.
+- Protect frontend routes.
+- Manage authentication state.
+- Send authenticated requests.
 
 ---
 
@@ -246,13 +231,12 @@ If any step fails, the deployment is automatically cancelled.
 
 After completing this chapter, you will be able to:
 
-- Containerize applications.
-- Configure Docker Compose.
-- Build professional CI pipelines.
-- Build professional CD pipelines.
-- Deploy applications automatically.
-- Debug GitHub Actions.
-- Apply modern DevOps practices to Full-Stack applications.
+- Design secure authentication systems.
+- Build JWT-based authentication.
+- Secure REST APIs.
+- Protect React applications.
+- Implement role-ready authentication architecture.
+- Follow authentication best practices used in production.
 
 ---
 
@@ -270,7 +254,7 @@ After completing this chapter, you will be able to:
 
 ## 🔵 Phase 2 — Production Applications
 
-- ⏳ Chapter 6 — Authentication
+- ✅ Chapter 6 — Authentication
 - ⏳ Chapter 7 — Server-Side Rendering
 - ⏳ Chapter 8 — Search Engine Optimization
 - ⏳ Chapter 9 — End-to-End Testing
@@ -305,9 +289,9 @@ After completing this chapter, you will be able to:
 
 # ➡️ Next Chapter
 
-## Chapter 6 — Authentication
+## Chapter 7 — Server-Side Rendering
 
-In the next chapter, we'll secure our application by implementing authentication using **JWT**, protected routes, authorization, password hashing, refresh tokens, and role-based access control (RBAC).
+In the next chapter, we'll improve our application's performance and user experience by introducing **Server-Side Rendering (SSR)**. We'll learn how SSR works, why it's important, and how it helps deliver faster page loads while improving SEO.
 
 ---
 
