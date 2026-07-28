@@ -20,7 +20,7 @@ export function Post({ _id, title, contents, author, tags }) {
 
   // Affichage du post en mode "lecture"
   return (
-    <article>
+    <article style={{ backgroundColor: 'lightgray', padding: 16, margin: 8, borderRadius: 20}}>
       {/* Titre du post */}
       <h3>{title}</h3>
       {/* Contenu du post */}

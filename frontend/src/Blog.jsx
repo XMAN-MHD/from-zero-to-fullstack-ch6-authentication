@@ -36,8 +36,13 @@ export function Blog() {
 
   // Affichage du composant principal
   return (
-    <div style={{ padding: 8 }}>
+    <div style={{ padding: 8, maxWidth: 800, margin: '0 auto' }}>
       {/* Formulaire de création de post */}
+      <br />
+      <h1 style={{ textAlign: 'center' }}>WELCOME TO MY BLOG</h1>
+      <br />
+      <br />
+      <h2>✍️ Create New Post</h2>
       <CreatePost />
       <br />
       <br />
@@ -45,8 +50,7 @@ export function Blog() {
       <br />
       <br />
       {/* Filtres */}
-      Filter by:
-      <br />
+      <h2>🔍 Filter By</h2>
       <br />
       <PostFilter field='author' value={author} onChange={setAuthor} />
       <br />
@@ -65,6 +69,7 @@ export function Blog() {
       <hr />
       <br />
       {/* Liste des posts */}
+      <h2>📚 All Posts </h2>
       <PostList posts={posts} />
     </div>
   )
