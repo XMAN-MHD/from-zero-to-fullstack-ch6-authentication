@@ -58,7 +58,7 @@ export function Post({ _id, title, contents, author, tags }) {
       {/* Bouton pour passer en mode édition */}
       <button
         onClick={() => setIsEditing(true)}
-        style={{ color: 'white', background: 'blue', marginTop: 8 }}
+        style={{ color: 'white', background: 'green', marginTop: 8 }}
       >
         Edit
       </button>
