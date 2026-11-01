@@ -1,7 +1,8 @@
 import { createUser } from '../services/users.js'
+import { loginUser } from '../services/users.js'
 
 export function usersRoutes(app) {
-  // CREATE / SIGNUP
+  // SIGNUP
   app.post('/api/v1/users/signup', async (req, res) => {
     try {
       const user = await createUser(req.body)
@@ -26,6 +27,27 @@ export function usersRoutes(app) {
       }
 
       return res.status(500).end()
+    }
+  })
+
+  // LOGIN
+  app.post('/api/v1/users/login', async (req, res) => {
+    try {
+      const result = await loginUser(req.body)
+
+      return res.status(200).json(result)
+    } catch (err) {
+      if (err.message === 'Invalid username or password') {
+        return res.status(401).json({
+          error: 'Invalid username or password',
+        })
+      }
+
+      console.error('Error logging in user:', err)
+
+      return res.status(500).json({
+        error: 'Internal server error',
+      })
     }
   })
 }

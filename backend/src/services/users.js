@@ -1,9 +1,11 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 import { User } from '../db/models/user.js'
 
 const SALT_ROUNDS = 10
 
+// SIGNUP
 export async function createUser({ username, password }) {
   if (!username) {
     throw new Error('Username is required')
@@ -32,4 +34,30 @@ export async function createUser({ username, password }) {
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   }
+}
+
+//LOGIN
+export async function loginUser(username, password) {
+  const user = await User.findOne({ username })
+
+  if (!user) {
+    throw new Error('Invalid username or password')
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(
+    password,
+    user.password,
+  )
+
+  if (!isPasswordCorrect) {
+    throw new Error('Invalid username or password')
+  }
+
+  const token = jwt.sign(
+    { sub: user._id.toString() },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' },
+  )
+
+  return { token }
 }

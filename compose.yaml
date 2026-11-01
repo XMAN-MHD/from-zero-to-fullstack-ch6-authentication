@@ -5,6 +5,7 @@ services:
     environment:
       PORT: 3001
       DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "3001:3001"
 
