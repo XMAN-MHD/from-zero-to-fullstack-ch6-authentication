@@ -8,6 +8,8 @@ import {
   deletePost,
 } from '../services/posts.js'
 
+import { requireAuth } from '../middleware/jwt.js'
+
 export function postsRoutes(app) {
 
   // READ
@@ -31,7 +33,7 @@ export function postsRoutes(app) {
       return res.status(500).end()
     }
   })
-  // THE GET SINGLE POST
+  /************* THE GET SINGLE POST *****/
   app.get('/api/v1/posts/:id', async (req, res) => {
     const { id } = req.params
     try {
@@ -45,9 +47,9 @@ export function postsRoutes(app) {
   })
 
   // CREATE
-  app.post('/api/v1/posts', async (req, res) => {
+  app.post('/api/v1/posts', requireAuth, async (req, res) => {
     try {
-      const post = await createPost(req.body)
+      const post = await createPost(req.auth.sub, req.body)
       return res.status(201).json(post)
     } catch (err) {
       console.error('error creating post', err)
@@ -56,9 +58,9 @@ export function postsRoutes(app) {
   })
 
   // UPDATE
-  app.patch('/api/v1/posts/:id', async (req, res) => {
+  app.patch('/api/v1/posts/:id', requireAuth, async (req, res) => {
     try {
-      const post = await updatePost(req.params.id, req.body) 
+      const post = await updatePost(req.auth.sub, req.params.id, req.body)
       if (!post) return res.status(404).end()
       return res.status(200).json(post)
     } catch (err) {
@@ -68,9 +70,9 @@ export function postsRoutes(app) {
   })
 
   // DELETE
-  app.delete('/api/v1/posts/:id', async (req, res) => {
+  app.delete('/api/v1/posts/:id', requireAuth, async (req, res) => {
     try {
-      const result = await deletePost(req.params.id)
+      const result = await deletePost(req.auth.sub, req.params.id)
       if (result.deletedCount === 0) return res.status(404).end()
       return res.status(204).end()
     } catch (err) {

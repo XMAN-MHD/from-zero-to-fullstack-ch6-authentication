@@ -39,25 +39,21 @@ export async function createUser({ username, password }) {
 //LOGIN
 export async function loginUser(username, password) {
   const user = await User.findOne({ username })
+  console.log('[loginUser] userFound:', Boolean(user))
 
   if (!user) {
     throw new Error('Invalid username or password')
   }
 
-  const isPasswordCorrect = await bcrypt.compare(
-    password,
-    user.password,
-  )
+  const isPasswordCorrect = await bcrypt.compare(password, user.password)
 
   if (!isPasswordCorrect) {
     throw new Error('Invalid username or password')
   }
 
-  const token = jwt.sign(
-    { sub: user._id.toString() },
-    process.env.JWT_SECRET,
-    { expiresIn: '1h' },
-  )
+  const token = jwt.sign({ sub: user._id.toString() }, process.env.JWT_SECRET, {
+    expiresIn: '1h',
+  })
 
   return { token }
 }

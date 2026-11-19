@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import CreatePost from './components/CreatePost'
-import PostFilter from './components/PostFilter'
-import PostSorting from './components/PostSorting'
-import { PostList } from './components/PostList'
-import { getPosts } from './api/posts'
-import { useDebounce } from './hooks/useDebounce'
+import CreatePost from '../components/CreatePost'
+import PostFilter from '../components/PostFilter'
+import PostSorting from '../components/PostSorting'
+import { PostList } from '../components/PostList'
+import { getPosts } from '../api/posts'
+import { useDebounce } from '../hooks/useDebounce'
+import { Header } from '../components/Header.jsx'
+
 
 // Composant principal du blog : gère les filtres, le tri, la création et l'affichage des posts
 export function Blog() {
@@ -37,6 +39,7 @@ export function Blog() {
   // Affichage du composant principal
   return (
     <div style={{ padding: 8, maxWidth: 800, margin: '0 auto' }}>
+      <Header />
       {/* Formulaire de création de post */}
       <br />
       <h1 style={{ textAlign: 'center' }}>WELCOME TO MY BLOG</h1>
